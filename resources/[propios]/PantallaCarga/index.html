@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Index</title>
+    <title>Odisea RP</title>
 </head>
 
 <body>
@@ -17,15 +17,142 @@
                 <button id="btn__playandstop__video"></button>
                 <div class="volume__controls">
                     <button id="icon__volume"></button>
-                    <input id="video__volume" type="range" max="100" min="0" value="0">
+                    <input id="video__volume" type="range" max="100" min="0" value="5">
+                </div>
+            </div>
+        </div>
+        <div class="content__header">
+            <div class="bars"></div>
+            <div class="non__play">
+                <div class="container__non__play">
+                    <h1>Bienvenido a Odisea RP</h1>
+                    <div class="spinner"><div class="lds-ripple"><div></div><div></div></div></div>
                 </div>
             </div>
         </div>
     </div>
-    <video id="bg__video">
-        <source src="./media/video.mp4" type="video/mp4">
-    </video>
-    <script src="./js/main.js"></script>
+    <div id="bg__video"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+
+        const btnStopAndPlay = document.querySelector('#btn__playandstop__video')
+
+        const iconVolume = document.querySelector('#icon__volume')
+
+        const videoInputVolume = document.querySelector('#video__volume')
+
+        const iconPlay = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>'
+
+        const iconPause = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pause"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>'
+
+        const iconSvgVolumeMin = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon></svg>'
+        const iconSvgVolumeMedium = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-1"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>'
+        const iconSvgVolumeMax = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>'
+        const iconSvgMute = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-x"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>'
+        var player;
+
+        let urlVideo = 'H6Jg2pDIScs'
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('bg__video', {
+                height: '360',
+                width: '640',
+                videoId: urlVideo,
+                playerVars: { 'autoplay': 1, 'controls': 0 },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function checkStatusVideo(value) {
+            if (value == true) {
+                btnStopAndPlay.innerHTML = iconPause
+                $('.non__play').fadeOut()
+
+            } else {
+                btnStopAndPlay.innerHTML = iconPlay
+                $('.non__play').fadeIn()
+            }
+
+        }
+
+        function setVolume(value) {
+            player.setVolume(value)
+            if (value == 0) {
+                iconVolume.innerHTML = iconSvgMute
+            } else if (value < 15) {
+                iconVolume.innerHTML = iconSvgVolumeMin
+            } else if (value >= 15 && value < 50) {
+                iconVolume.innerHTML = iconSvgVolumeMedium
+            } else if (value >= 50) {
+                iconVolume.innerHTML = iconSvgVolumeMax
+            }
+        }
+
+        function ResetInput(value) {
+            videoInputVolume.value = value
+        }
+
+        let valueVolume = 5
+
+        function setMute() {
+            if (player.getVolume() !== 0) {
+                valueVolume = videoInputVolume.value
+                setVolume(0)
+                ResetInput(0)
+            } else {
+                if (valueVolume == 0) {
+                    valueVolume = 5
+                    setVolume(valueVolume)
+                    ResetInput(valueVolume)
+                    
+                } else {
+                    setVolume(valueVolume)
+                    ResetInput(valueVolume)
+                }
+            }
+        }
+
+
+        function onPlayerStateChange(event) {
+
+            let Status = event.data
+
+            if (event.data == YT.PlayerState.PLAYING) {
+                checkStatusVideo(true)
+            } else {
+                checkStatusVideo(false)
+            }
+
+            
+
+            setVolume(videoInputVolume.value)
+            btnStopAndPlay.addEventListener('click', () => {
+                checkStatusVideo()
+                if (event.data == YT.PlayerState.PLAYING) {
+                    player.stopVideo();
+                } else {
+                    player.playVideo();
+                }
+            })
+
+
+        }
+
+        videoInputVolume.addEventListener('change', (e) => {
+            e.preventDefault()
+            setVolume(videoInputVolume.value)
+
+        })
+
+        iconVolume.addEventListener('click', (e) => {
+            e.preventDefault()
+            setMute()
+        })
+    </script>
+
 </body>
 
 </html>
