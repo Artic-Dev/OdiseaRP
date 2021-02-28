@@ -1,0 +1,146 @@
+/* Global */
+
+html {
+	font-size: 62.5%;
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+img {
+	max-width: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: black;
+}
+
+
+#bg__video {
+	width: 100%;
+	height: 100vh;
+}
+
+
+$colorControlsIcons: #e84118;
+
+$colorControlsBackground: #2f3640;
+
+$valorWidthControls: 24rem;
+
+.site__header {
+	width: 100%;
+	height: 100vh;
+	background: rgba(51, 51, 51, 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+
+	.content__header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1000;
+		background: radial-gradient(rgba(255, 72, 72, 0.064), rgba(251, 12, 12, 0.276));
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+	}
+
+	#controls__video {
+		position: absolute;
+		width: 5rem;
+		height: 5rem;
+		bottom: 3rem;
+		left: 3rem;
+		border-radius: 3rem;
+		background: $colorControlsBackground;
+		transition: .5s;
+		overflow: hidden;
+
+		&:hover {
+			width: $valorWidthControls;
+		}
+
+		.container__play {
+			min-width: $valorWidthControls;
+			height: 5rem;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding-right: 1rem;
+
+			#btn__playandstop__video {
+				width: 5rem;
+				height: 5rem;
+				border-radius: 3rem;
+				border: none;
+				background: $colorControlsBackground;
+				font-size: 3rem;
+				outline: none;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: $colorControlsBackground;
+				z-index: 100;
+				svg{
+					stroke: $colorControlsIcons;
+				}
+				&:hover {
+					background: $colorControlsIcons;
+					svg{
+						stroke: $colorControlsBackground;
+					}
+				}
+			}
+
+			.volume__controls {
+				width: calc($valorWidthControls - 6rem);
+				padding-left: 1rem;
+				display: flex;
+				align-items: center;
+
+				#icon__volume {
+					width: 5rem;
+					height: 5rem;
+					border-radius: 100%;
+					background: none;
+					border: none;
+					cursor: pointer;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					outline: none;
+					svg{
+						stroke: $colorControlsIcons;
+					}
+					&:hover {
+						background: $colorControlsIcons;
+						svg{
+							stroke: $colorControlsBackground;
+						}
+					}
+				}
+
+				input {
+					width: 50%;
+					margin-left: 1rem;
+				}
+			}
+		}
+
+
+	}
+}
