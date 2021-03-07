@@ -1,0 +1,533 @@
+/* Global */
+html {
+  font-size: 62.5%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  overflow: hidden;
+}
+
+#container__vehicle {
+  display: none;
+}
+
+#container__vehicle.conduciendo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  left: 35rem;
+  bottom: 10rem;
+}
+
+#container__vehicle.conduciendo #speedNumber {
+  font-size: 5rem;
+  color: #e74c3c;
+}
+
+#container__status__hud {
+  height: 23rem;
+  width: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  bottom: 2rem;
+  left: 1.5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+#container__status__hud .slot__status {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.26);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+}
+
+#container__status__hud .slot__status.vida span {
+  width: 100%;
+  height: 100%;
+  background: #e74c3c;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+#container__status__hud .slot__status.vida::after {
+  content: '';
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: url("./img/activity.svg");
+  background-size: cover;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+#container__status__hud .slot__status.escudo span {
+  width: 100%;
+  height: 100%;
+  background: #f1c40f;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+#container__status__hud .slot__status.escudo::after {
+  content: '';
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: url("./img/shield.svg");
+  background-size: cover;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+#container__status__hud .slot__status.comida span {
+  width: 100%;
+  height: 100%;
+  background: #e67e22;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+#container__status__hud .slot__status.comida::after {
+  content: '';
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: url("./img/food.svg");
+  background-size: cover;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+#container__status__hud .slot__status.agua span {
+  width: 100%;
+  height: 100%;
+  background: #3498db;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+#container__status__hud .slot__status.agua::after {
+  content: '';
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: url("./img/droplet.svg");
+  background-size: cover;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+#container__status__hud .slot__status.estamina span {
+  width: 100%;
+  height: 100%;
+  background: #2ecc71;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+#container__status__hud .slot__status.estamina::after {
+  content: '';
+  width: 2.2rem;
+  height: 2.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: url("./img/run.svg");
+  background-size: cover;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+#container__status__hud .slot__status.oxigeno {
+  display: none;
+}
+
+#container__status__hud.nadando {
+  height: 27rem;
+}
+
+#container__status__hud.nadando .slot__status.oxigeno {
+  display: block;
+}
+
+#container__status__hud.nadando .slot__status.oxigeno span {
+  width: 100%;
+  height: 100%;
+  background: #9b59b6;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+#container__status__hud.nadando .slot__status.oxigeno::after {
+  content: '';
+  width: 2.2rem;
+  height: 2.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: url("./img/pulmon.svg");
+  background-repeat: no-repeat;
+  background-position-y: .2rem;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+#container__status__hud.quitar {
+  display: none;
+}
+
+#container__status__hud.conduciendo {
+  height: 27rem;
+  width: 5rem;
+  bottom: -10rem;
+  left: 13.9rem;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  padding: 1rem 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: -webkit-gradient(linear, right top, left top, color-stop(40%, rgba(39, 39, 39, 0.993)), to(rgba(10, 10, 10, 0)));
+  background: linear-gradient(-90deg, rgba(39, 39, 39, 0.993) 40%, rgba(10, 10, 10, 0));
+  border-radius: 0 1rem 1rem 0;
+}
+
+#container__status__hud.conduciendo .slot__status {
+  background: rgba(255, 255, 255, 0.26);
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+#container__status__hud.conduciendo.nadando {
+  padding: .5rem 0;
+}
+
+@-webkit-keyframes updateMoney {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes updateMoney {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+.stats__account {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  min-width: 27rem;
+  height: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.stats__account.quitar {
+  display: none;
+}
+
+.stats__account h1 {
+  text-align: right;
+  margin-right: 1rem;
+  text-transform: uppercase;
+  color: white;
+}
+
+.stats__account #Accountmoney {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 5rem;
+  min-width: 27rem;
+}
+
+.stats__account #Accountmoney div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-right: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.stats__account #Accountmoney div span {
+  margin-right: 1rem;
+}
+
+.stats__account #Accountmoney div svg {
+  width: 1.7rem;
+}
+
+.stats__account #Accountmoney .idPlayer {
+  background: #00000060;
+  height: 3rem;
+  border-radius: 3rem;
+  min-width: 7rem;
+  color: white;
+}
+
+.stats__account #Accountmoney .idPlayer.animate {
+  -webkit-animation: updateMoney .5s;
+          animation: updateMoney .5s;
+}
+
+.stats__account #Accountmoney .idPlayer p {
+  margin-right: 1.5rem;
+}
+
+.stats__account #Accountmoney .idPlayer span {
+  width: 5rem;
+  height: 3rem;
+  background: #9b59b6;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 3rem;
+}
+
+.stats__account #Accountmoney .wallet {
+  background: #00000060;
+  height: 3rem;
+  border-radius: 3rem;
+  min-width: 10rem;
+  color: white;
+}
+
+.stats__account #Accountmoney .wallet.animate {
+  -webkit-animation: updateMoney .5s;
+          animation: updateMoney .5s;
+}
+
+.stats__account #Accountmoney .wallet p {
+  margin-right: 1.5rem;
+}
+
+.stats__account #Accountmoney .wallet span {
+  width: 5rem;
+  height: 3rem;
+  background: #2ecc71;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 3rem;
+}
+
+.stats__account #Accountmoney .dirty__money {
+  background: #00000060;
+  height: 3rem;
+  border-radius: 3rem;
+  min-width: 10rem;
+  color: white;
+}
+
+.stats__account #Accountmoney .dirty__money p {
+  margin-right: 1.5rem;
+}
+
+.stats__account #Accountmoney .dirty__money span {
+  width: 5rem;
+  height: 3rem;
+  background: #2c3e50;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 3rem;
+}
+
+.stats__account #Accountmoney .dirty__money span svg {
+  width: 2rem;
+}
+
+.stats__account #Accountmoney .bank {
+  background: #00000060;
+  height: 3rem;
+  border-radius: 3rem;
+  min-width: 10rem;
+  color: white;
+}
+
+.stats__account #Accountmoney .bank p {
+  margin-right: 1.5rem;
+}
+
+.stats__account #Accountmoney .bank span {
+  width: 5rem;
+  height: 3rem;
+  background: #e74c3c;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 3rem;
+}
+
+.stats__account #Accountmoney .bank span svg {
+  width: 2rem;
+}
+
+.stats__account #Accountmoney .sociedad {
+  display: none;
+}
+
+.stats__account #Accountmoney.soc .sociedad {
+  background: #00000060;
+  height: 3rem;
+  border-radius: 3rem;
+  min-width: 10rem;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.stats__account #Accountmoney.soc .sociedad p {
+  margin-right: 1.5rem;
+}
+
+.stats__account #Accountmoney.soc .sociedad span {
+  width: 5rem;
+  height: 3rem;
+  background: #e67e22;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 3rem;
+}
+
+.stats__account #Accountmoney.soc .sociedad span svg {
+  width: 1.9rem;
+}
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,12 @@
+{
+  "name": "WebSocket-async",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "https://github.com/Artic-Dev/WebSocket-async.git",
+  "author": "Jose Garcia Garcia <47431411+Blazester@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.1.2"
+  }
+}
