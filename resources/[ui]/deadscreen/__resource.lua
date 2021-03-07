@@ -1,0 +1,15 @@
+
+resource_manifest_version '77731fab-63ca-442c-a67b-abc70f28dfa5'
+-- server_script "main_sv.lua"
+client_script "main.lua"
+
+ui_page 'html/ui.html'
+
+files {
+	'html/ui.html',
+	'html/app.css',
+	'html/main.js'
+}
+
+author 'Artic Solutions'
+description 'Pantalla de muerte de articsolutions.ga'
