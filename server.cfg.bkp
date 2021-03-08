@@ -42,6 +42,7 @@ ensure esx_eden_garage
 ensure esx_vehicleshop-master
 ensure esx_shops 
 ensure afkkick
+ensure hav_whitelistdb
 
 # UI
 ensure Modern_HUD

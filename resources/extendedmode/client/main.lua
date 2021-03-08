@@ -404,6 +404,19 @@ CreateThread(function()
 		end
 	end
 end)
+
+CreateThread(function()
+	while true do
+		Wait(0)
+
+		if IsControlJustReleased(0, 289) then
+			if IsInputDisabled(0) and not isDead and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') then
+				ESX.ShowInventory()
+			end
+		end
+	end
+end)
+
 -- Disable wanted level
 if Config.DisableWantedLevel then
 	-- Previous they were creating a contstantly running loop to check if the wanted level
